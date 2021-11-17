@@ -1,4 +1,10 @@
-# bootstrap-template
+The format for the documents file is one document per line, with each line consisting of
+
+[doc ID] [tab] [label] [tab] [text...]
+
+To work with the timeseries visualization, the label should be date
+
+## bootstrap-template
 
 [bootstrap-template](https://github.com/thecdil/bootstrap-template) is a basic template repository to create a [Bootstrap](https://getbootstrap.com/) site using Jekyll on GitHub Pages (or where every you want to host it). 
 The layout is based on the [Bootstrap starter template example](https://getbootstrap.com/docs/4.5/examples/) with a navbar, search box (using lunr.js), and sticky footer.

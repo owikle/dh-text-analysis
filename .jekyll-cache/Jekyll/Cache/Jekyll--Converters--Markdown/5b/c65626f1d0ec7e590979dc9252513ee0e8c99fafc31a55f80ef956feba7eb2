@@ -1,0 +1,74 @@
+I"Q<p>Write pages in Markdown.</p>
+
+<h2 id="heading-two">Heading Two</h2>
+
+<p>Any text with no empty lines between will become a paragraph.
+Leave an blank line between headings and paragraphs.
+Font can be <em>Italic</em> or <strong>Bold</strong>.
+Code can be highlighted with <code class="language-plaintext highlighter-rouge">backticks</code>.</p>
+
+<p>Hyperlinks look like this <a href="https://help.github.com/">GitHub Help</a>.</p>
+
+<h3 id="lists">Lists</h3>
+
+<p>A bullet list is created using <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">+</code>, or <code class="language-plaintext highlighter-rouge">-</code>, like:</p>
+
+<ul>
+  <li>dog</li>
+  <li>cat</li>
+  <li>muffin</li>
+</ul>
+
+<p>A numbered list is created using a number + <code class="language-plaintext highlighter-rouge">.</code>, like:</p>
+
+<ol>
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+</ol>
+
+<p>Horizontal rule:</p>
+
+<hr />
+
+<figure class="figure text-center p-3 w-100">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/VAN_CAT.png/480px-VAN_CAT.png" alt="white cat" class="figure-img img-fluid rounded" />
+    <figcaption class="figure-caption"><p>I found this <a href="https://commons.wikimedia.org/wiki/File:VAN_CAT.png">Cat image on Wikimedia</a>.</p>
+</figcaption>
+</figure>
+
+<blockquote class="blockquote">
+  <p>A block quote.
+Is like this.</p>
+</blockquote>
+
+<h3 id="a-table">A Table</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>header</th>
+      <th>column a</th>
+      <th>column b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>dogs</td>
+      <td>3</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>cats</td>
+      <td>3</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>muffins</td>
+      <td>15</td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+:ET
