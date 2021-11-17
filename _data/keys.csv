@@ -1,4 +1,4 @@
-Topic,TokenCount,Words
+topic,tokencount,words
 0,34605,"work children tax help health government economy care country working"
 1,26237,"energy reform states nuclear continue americans work support oil commitment"
 2,27306,"administration development legislation efforts federal health over act assistance rights"
@@ -22,5 +22,5 @@ Topic,TokenCount,Words
 20,33007,"very upon present action life way out among duty two"
 21,40329,"states mexico government constitution had into united state were any"
 22,34034,"work made legislation about further into under law per action"
-23,45195,"nation free peace united nations power america freedom states progress"
+freedom,45195,"nation free peace united nations power america freedom states progress"
 24,33691,"american united department commission between service states foreign canal under"

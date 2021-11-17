@@ -3,21 +3,58 @@ title: Home
 layout: default
 ---
 
-
 <div class="container">
-    <canvas id="myChart" width="400"></canvas>
+    {% assign topics = site.data.keys %}
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <thead>
+                   <tr>
+                      <th>Topic</th>
+                      <th>Word Count</th>
+                      <th>Words</th>
+                   </tr>
+                </thead>
+                <tbody>
+                {% for t in topics %}
+                <tr>
+                   <td class="topic">{{ t.topic }}</td>
+                   <td class="count center">{{ t.tokencount }}</td>
+                   <td class="words">{{ t.words }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <canvas id="myChart" width="400" class="py-5"></canvas>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
+
+{% assign people = site.data.doctopics %}
 
 <script>
 const ctx = document.getElementById('myChart');
+const presidents = [
+    {%- for p in site.data.doctopics -%}
+    {{ p.president | jsonify }}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+]
+const topic = [
+    {%- for p in site.data.doctopics -%}
+    {{ p.freedom | jsonify }}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+]
+
 const myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['George-Washington-1790-01', 'George-Washington-1790-02', 'George-Washington-1791', 'George-Washington-1792', 'George-Washington-1793', 'George-Washington-1794', 'George-Washington-1795', 'George-Washington-1796', 'John-Adams-1797', 'John-Adams-1798', 'John-Adams-1799', 'John-Adams-1800', 'Thomas-Jefferson-1801', 'Thomas-Jefferson-1802', 'Thomas-Jefferson-1803', 'Thomas-Jefferson-1804', 'Thomas-Jefferson-1805', 'Thomas-Jefferson-1806', 'Thomas-Jefferson-1807', 'Thomas-Jefferson-1808', 'James-Madison-1809', 'James-Madison-1810', 'James-Madison-1811', 'James-Madison-1812', 'James-Madison-1813', 'James-Madison-1814', 'James-Madison-1815', 'James-Madison-1816', 'James-Monroe-1817', 'James-Monroe-1818', 'James-Monroe-1819', 'James-Monroe-1820', 'James-Monroe-1821', 'James-Monroe-1822', 'James-Monroe-1823', 'James-Monroe-1824', 'John-Quincy-Adams-1825', 'John-Quincy-Adams-1826', 'John-Quincy-Adams-1827', 'John-Quincy-Adams-1828', 'Andrew-Jackson-1829', 'Andrew-Jackson-1830', 'Andrew-Jackson-1831', 'Andrew-Jackson-1832', 'Andrew-Jackson-1833', 'Andrew-Jackson-1834', 'Andrew-Jackson-1835', 'Andrew-Jackson-1836', 'Martin-Van-Buren-1837', 'Martin-Van-Buren-1838', 'Martin-Van-Buren-1839', 'Martin-Van-Buren-1840', 'John-Tyler-1841', 'John-Tyler-1842', 'John-Tyler-1843', 'John-Tyler-1844', 'James-K-Polk-1845', 'James-K-Polk-1846', 'James-K-Polk-1847', 'James-K-Polk-1848', 'Zachary-Taylor-1849', 'Millard-Fillmore-1850', 'Millard-Fillmore-1851', 'Millard-Fillmore-1852', 'Franklin-Pierce-1853', 'Franklin-Pierce-1854', 'Franklin-Pierce-1855', 'Franklin-Pierce-1856', 'James-Buchanan-1857', 'James-Buchanan-1858', 'James-Buchanan-1859', 'James-Buchanan-1860', 'Abraham-Lincoln-1861', 'Abraham-Lincoln-1862', 'Abraham-Lincoln-1863', 'Abraham-Lincoln-1864', 'Andrew-Johnson-1865', 'Andrew-Johnson-1866', 'Andrew-Johnson-1867', 'Andrew-Johnson-1868', 'Ulysses-S-Grant-1869', 'Ulysses-S-Grant-1870', 'Ulysses-S-Grant-1871', 'Ulysses-S-Grant-1872', 'Ulysses-S-Grant-1873', 'Ulysses-S-Grant-1874', 'Ulysses-S-Grant-1875', 'Ulysses-S-Grant-1876', 'Rutherford-B-Hayes-1877', 'Rutherford-B-Hayes-1878', 'Rutherford-B-Hayes-1879', 'Rutherford-B-Hayes-1880', 'Chester-A-Arthur-1881', 'Chester-A-Arthur-1882', 'Chester-A-Arthur-1883', 'Chester-A-Arthur-1884', 'Grover-Cleveland-1885', 'Grover-Cleveland-1886', 'Grover-Cleveland-1887', 'Grover-Cleveland-1888', 'Benjamin-Harrison-1889', 'Benjamin-Harrison-1890', 'Benjamin-Harrison-1891', 'Benjamin-Harrison-1892', 'Grover-Cleveland-1893', 'Grover-Cleveland-1894', 'Grover-Cleveland-1895', 'Grover-Cleveland-1896', 'William-McKinley-1897', 'William-McKinley-1898', 'William-McKinley-1899', 'William-McKinley-1900', 'Theodore-Roosevelt-1901', 'Theodore-Roosevelt-1902', 'Theodore-Roosevelt-1903', 'Theodore-Roosevelt-1904', 'Theodore-Roosevelt-1905', 'Theodore-Roosevelt-1906', 'Theodore-Roosevelt-1907', 'Theodore-Roosevelt-1908', 'William-Howard-Taft-1909', 'William-Howard-Taft-1910', 'William-Howard-Taft-1911', 'William-Howard-Taft-1912', 'Woodrow-Wilson-1913', 'Woodrow-Wilson-1914', 'Woodrow-Wilson-1915', 'Woodrow-Wilson-1916', 'Woodrow-Wilson-1917', 'Woodrow-Wilson-1918', 'Woodrow-Wilson-1919', 'Woodrow-Wilson-1920', 'Warren-G-Harding-1921', 'Warren-G-Harding-1922', 'Calvin-Coolidge-1923', 'Calvin-Coolidge-1924', 'Calvin-Coolidge-1925', 'Calvin-Coolidge-1926', 'Calvin-Coolidge-1927', 'Calvin-Coolidge-1928', 'Herbert-Hoover-1929', 'Herbert-Hoover-1930', 'Herbert-Hoover-1931', 'Herbert-Hoover-1932', 'Franklin-D-Roosevelt-1934', 'Franklin-D-Roosevelt-1935', 'Franklin-D-Roosevelt-1936', 'Franklin-D-Roosevelt-1937', 'Franklin-D-Roosevelt-1938', 'Franklin-D-Roosevelt-1939', 'Franklin-D-Roosevelt-1940', 'Franklin-D-Roosevelt-1941', 'Franklin-D-Roosevelt-1942', 'Franklin-D-Roosevelt-1943', 'Franklin-D-Roosevelt-1944', 'Franklin-D-Roosevelt-1945-01', 'Franklin-D-Roosevelt-1945-02', 'Harry-S-Truman-1946', 'Harry-S-Truman-1947', 'Harry-S-Truman-1948', 'Harry-S-Truman-1949', 'Harry-S-Truman-1950', 'Harry-S-Truman-1951', 'Harry-S-Truman-1952', 'Dwight-D-Eisenhower-1953', 'Harry-S-Truman-1953', 'Dwight-D-Eisenhower-1954', 'Dwight-D-Eisenhower-1955', 'Dwight-D-Eisenhower-1956-01', 'Dwight-D-Eisenhower-1956-02', 'Dwight-D-Eisenhower-1957', 'Dwight-D-Eisenhower-1958', 'Dwight-D-Eisenhower-1959', 'Dwight-D-Eisenhower-1960', 'John-F-Kennedy-1961', 'Dwight-D-Eisenhower-1961', 'John-F-Kennedy-1962', 'John-F-Kennedy-1963', 'Lyndon-B-Johnson-1964', 'Lyndon-B-Johnson-1965', 'Lyndon-B-Johnson-1966', 'Lyndon-B-Johnson-1967', 'Lyndon-B-Johnson-1968', 'Lyndon-B-Johnson-1969', 'Richard-M-Nixon-1970', 'Richard-M-Nixon-1971', 'Richard-M-Nixon-1972-01', 'Richard-M-Nixon-1972-02', 'Richard-M-Nixon-1973-01', 'Richard-M-Nixon-1973-02', 'Richard-M-Nixon-1973-03', 'Richard-M-Nixon-1973-04', 'Richard-M-Nixon-1973-05', 'Richard-M-Nixon-1973-06', 'Richard-M-Nixon-1973-07', 'Richard-M-Nixon-1973-08', 'Richard-M-Nixon-1973-09', 'Richard-M-Nixon-1973-10', 'Richard-M-Nixon-1973-11', 'Richard-M-Nixon-1974-01', 'Richard-M-Nixon-1974-02', 'Gerald-R-Ford-1975', 'Gerald-R-Ford-1976', 'Gerald-R-Ford-1977', 'Jimmy-Carter-1978-01', 'Jimmy-Carter-1978-02', 'Jimmy-Carter-1979-01', 'Jimmy-Carter-1979-02', 'Jimmy-Carter-1980-01', 'Jimmy-Carter-1980-02', 'Ronald-Reagan-1981', 'Jimmy-Carter-1981', 'Ronald-Reagan-1982', 'Ronald-Reagan-1983', 'Ronald-Reagan-1984', 'Ronald-Reagan-1985', 'Ronald-Reagan-1986', 'Ronald-Reagan-1987', 'Ronald-Reagan-1988', 'George-Bush-1989', 'George-Bush-1990', 'George-Bush-1991', 'George-Bush-1992', 'William-J-Clinton-1993', 'William-J-Clinton-1994', 'William-J-Clinton-1995', 'William-J-Clinton-1996', 'William-J-Clinton-1997', 'William-J-Clinton-1998', 'William-J-Clinton-1999', 'William-J-Clinton-2000', 'George-W-Bush-2001', 'George-W-Bush-2002', 'George-W-Bush-2003', 'George-W-Bush-2004', 'George-W-Bush-2005', 'George-W-Bush-2006', 'George-W-Bush-2007', 'George-W-Bush-2008', 'Barack-Obama-2009', 'Barack-Obama-2010', 'Barack-Obama-2011', 'Barack-Obama-2012', 'Barack-Obama-2013', 'Barack-Obama-2014', 'Barack-Obama-2015', 'Barack-Obama-2016', 'Donald-J-Trump-2017', 'Donald-J-Trump-2018', 'Donald-J-Trump-2019', 'Donald-J-Trump-2020', 'Joseph-R-Biden-2021'],
+        labels: presidents,
         datasets: [{
             label: 'Freedom Topic',
-            data: [0.020793951, 0.0050614606, 0.0048737262, 0.013718765, 0.033350703, 0.023525281, 0.015938303, 0.011819484, 0.023633678, 0.017964072, 0.014955812, 0.020725389, 0.016159696, 0.011162791, 0.033168983, 0.0048590865, 0.01960098, 0.012802276, 0, 0.0072629969, 0.017366947, 0, 0.0076370171, 0.010735712, 0.021376925, 0.019806763, 0.020228385, 0.022065584, 0.0092721372, 0.010690216, 0.005856833, 0.016627078, 0, 0.014115092, 0.0094855305, 0.0098564128, 0.029147216, 0.019194631, 0.021279762, 0.023347398, 0.013047712, 0.011811825, 0.015292268, 0.018491991, 0.0094486151, 0.0093193797, 0.017653982, 0.0065310847, 0.007523511, 0.0089913647, 0.0053475936, 0.013243521, 0.0083064716, 0.0054918233, 0.01024984, 0.015254609, 0.011585715, 0.012888339, 0.0127997, 0.015371313, 0.01242236, 0.013553475, 0.0088276289, 0.016234102, 0.020150054, 0.016959419, 0.026559497, 0.02350884, 0.016518329, 0.013820523, 0.013131482, 0.022850447, 0.016388602, 0.029379089, 0.017514315, 0.01216968, 0.037434932, 0.019446845, 0.030960549, 0.021321512, 0.016919565, 0.018612322, 0.0084274129, 0.0089848188, 0.0051599587, 0.0093931398, 0.022447257, 0.0044180378, 0.011710501, 0.0113934, 0.0054969412, 0.011015252, 0.0074795481, 0.0070186146, 0.0080936372, 0.008372093, 0.012766837, 0.0087116314, 0.0034992224, 0.013133208, 0.008088177, 0.0087609512, 0.0089149261, 0.0080688542, 0.0056031921, 0.0035372724, 0.0095626494, 0.0071850658, 0.017115743, 0.014692284, 0.015255461, 0.014717022, 0.026815353, 0.014041706, 0.015446145, 0.016447176, 0.015160803, 0.022535823, 0.0089884274, 0.0081309398, 0.0046815784, 0.0068224651, 0.0073349633, 0.019830028, 0.041151079, 0.037846362, 0.042697526, 0.012071463, 0.04975254, 0.019086826, 0.022546704, 0.046042618, 0.0281948, 0.016352648, 0.033563218, 0.018052678, 0.014751773, 0.01780178, 0.011021222, 0.0099680511, 0.010902256, 0.010966415, 0.018211323, 0.020045101, 0.022611906, 0.036449148, 0.066307278, 0.059153875, 0.040718039, 0.080230011, 0.094072165, 0.090346535, 0.059239611, 0.067643743, 0.070141921, 0.046971169, 0.040898256, 0.017301953, 0.047667688, 0.064177598, 0.06006006, 0.0692632, 0.1028396, 0.076997298, 0.0430742, 0.089507813, 0.043500688, 0.047895706, 0.024667932, 0.048104413, 0.077037404, 0.054743, 0.067821068, 0.084684028, 0.069040987, 0.04658594, 0.076614842, 0.083058413, 0.069699903, 0.079089416, 0.090823618, 0.058100395, 0.068372393, 0.056797738, 0.065344224, 0.068499534, 0.054488843, 0.027117407, 0.046612803, 0.022386337, 0.023193815, 0.015274664, 0.011086475, 0.010428737, 0.041593439, 0.013019529, 0.032555616, 0.0047875524, 0.024475524, 0.072889249, 0.015489728, 0.042242704, 0.049421661, 0.088587922, 0.058984286, 0.012457045, 0.067662008, 0.0076063932, 0.083827014, 0.010655865, 0.017638758, 0.01729381, 0.053370787, 0.049079755, 0.071593533, 0.062683643, 0.092548788, 0.066813308, 0.083908542, 0.050627434, 0.074145007, 0.071764092, 0.032350532, 0.027690933, 0.019467787, 0.025492862, 0.027604338, 0.027632791, 0.037365784, 0.026535149, 0.028756207, 0.032559253, 0.062985795, 0.051311728, 0.04436928, 0.05158002, 0.059867395, 0.0505013, 0.049603175, 0.028851108, 0.016623674, 0.021860395, 0.019500665, 0.027109351, 0.023499852, 0.029280321, 0.032528677, 0.046357616, 0.027748321, 0.039889706, 0.029547706, 0.026462027],
+            data: topic,
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
